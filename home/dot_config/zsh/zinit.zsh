@@ -99,6 +99,10 @@ zinit wait lucid for \
     OMZP::poetry-env \
     OMZP::python
 
+# nodejs
+zinit wait lucid for \
+    OMZP::npm
+
 # Commands
 # =========================================================== #
 

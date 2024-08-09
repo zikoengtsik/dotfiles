@@ -15,6 +15,7 @@ By managing my dotfiles, I can easily set up a new development environment on an
 - Git configuration and ignore files, enable git signing using SSH Key.
 - Manage all runtime versions with [asdf](https://asdf-vm.com/).
   - Python, use [poetry](https://python-poetry.org) for dependency management and packaging.
+  - Node.js, use [pnpm](https://pnpm.io) as package manager.
 
 ## LICENSE
 

@@ -22,3 +22,12 @@ poetry==1.8.3
 tldr==3.3.0
 trash-cli==0.24.5.26
 EOF
+
+# Plugin: nodejs
+# =========================================================== #
+
+NODE_VERSION=20.16.0
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs ${NODE_VERSION}
+asdf global nodejs ${NODE_VERSION}
+npm install -g npm pnpm

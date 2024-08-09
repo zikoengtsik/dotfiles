@@ -37,3 +37,8 @@ trash-empty --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-empty
 trash-list --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-list
 trash-restore --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-restore
 trash-put --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-put
+
+# node
+curl -s https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_node -o ${ZSH_COMPLETIONS_HOME}/_node
+# pnpm
+pnpm completion zsh > ${ZSH_COMPLETIONS_HOME}/_pnpm
