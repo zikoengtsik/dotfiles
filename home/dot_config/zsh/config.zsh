@@ -107,3 +107,18 @@ export ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
 [ ! -d ${ASDF_DIR}/.git ] && git clone https://github.com/asdf-vm/asdf.git "${ASDF_DIR}"
 source "${ASDF_DIR}/asdf.sh"
 fpath=(${ASDF_DIR}/completions $fpath)
+
+# Python
+# =========================================================== #
+
+# virtualenv
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# pip
+export PIP_CONFIG_FILE="${XDG_CONFIG_HOME}/pip/pip.conf"
+
+# ipython
+export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
+
+# poetry
+export POETRY_CACHE_DIR="${XDG_CACHE_HOME}/poetry"

@@ -14,6 +14,7 @@ By managing my dotfiles, I can easily set up a new development environment on an
 - Customizable prompt by [starship](https://github.com/starship/starship).
 - Git configuration and ignore files, enable git signing using SSH Key.
 - Manage all runtime versions with [asdf](https://asdf-vm.com/).
+  - Python, use [poetry](https://python-poetry.org) for dependency management and packaging.
 
 ## LICENSE
 

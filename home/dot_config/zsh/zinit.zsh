@@ -47,7 +47,7 @@ zinit wait lucid for \
     OMZP::colored-man-pages \
     OMZP::command-not-found \
   atinit'GLOBALIAS_FILTER_VALUES=(
-    grep ls
+    grep ls pyserver
   )' \
     OMZP::globalias
 
@@ -93,6 +93,11 @@ zinit light zsh-users/zsh-autosuggestions
 # zsh-autopair
 zinit ice wait lucid
 zinit light hlissner/zsh-autopair
+
+# python
+zinit wait lucid for \
+    OMZP::poetry-env \
+    OMZP::python
 
 # Commands
 # =========================================================== #

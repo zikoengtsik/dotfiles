@@ -14,3 +14,26 @@ mkdir -p ${ZSH_COMPLETIONS_HOME}
 curl -s https://raw.githubusercontent.com/clarketm/zsh-completions/master/src/_diskutil -o ${ZSH_COMPLETIONS_HOME}/_diskutil
 
 {{- end }}
+
+# Asdf
+# =========================================================== #
+
+export ASDF_DIR="${XDG_DATA_HOME}/asdf"
+export ASDF_DATA_DIR="${ASDF_DIR}"
+
+. "${ASDF_DIR}/asdf.sh"
+
+# pip: pip completion --zsh > ${ZSH_COMPLETIONS_HOME}/_pip
+curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/pip/_pip -o ${ZSH_COMPLETIONS_HOME}/_pip
+# poetry: poetry completions zsh > ./_poetry
+curl -s https://raw.githubusercontent.com/clarketm/zsh-completions/master/src/_poetry -o ${ZSH_COMPLETIONS_HOME}/_poetry
+# pre-commit
+curl -s https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_pre-commit -o ${ZSH_COMPLETIONS_HOME}/_pre-commit
+# tldr
+tldr --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_tldr
+# trash-cli
+trash --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash
+trash-empty --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-empty
+trash-list --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-list
+trash-restore --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-restore
+trash-put --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_trash-put

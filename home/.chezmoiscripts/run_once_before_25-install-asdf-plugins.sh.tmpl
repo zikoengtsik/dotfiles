@@ -6,3 +6,19 @@ export ASDF_DATA_DIR="${ASDF_DIR}"
 
 [ ! -d $ASDF_DIR/.git ] && git clone https://github.com/asdf-vm/asdf.git "${ASDF_DIR}"
 source "${ASDF_DIR}/asdf.sh"
+
+# Plugin: python
+# =========================================================== #
+
+PYTHON_VERSION=3.10.14
+asdf plugin add python https://github.com/asdf-community/asdf-python.git
+asdf install python ${PYTHON_VERSION}
+asdf global python ${PYTHON_VERSION}
+pip install --upgrade pip
+pip install -r /dev/stdin <<EOF
+ipython==8.26.0
+pre-commit==3.8.0
+poetry==1.8.3
+tldr==3.3.0
+trash-cli==0.24.5.26
+EOF
