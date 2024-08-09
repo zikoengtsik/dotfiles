@@ -1,0 +1,56 @@
+[apply]
+  whitespace = fix
+
+[branch]
+  autosetuprebase = always
+  sort = -committerdate
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow bold
+  remote = green bold
+  plain = red bold
+
+[color "status"]
+  added = green
+  changed = yellow bold
+  untracked = red bold
+
+[commit]
+  verbose = true
+
+[fetch]
+  prune = true
+
+[help]
+  autocorrect = 1
+
+[init]
+  defaultBranch = main
+
+[merge]
+  conflictstyle = diff3
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  default = simple
+  followTags = true
+
+[rebase]
+  autosquash = true
+  autostash = true
+  missingCommitsCheck = error
+  updateRefs = true
+
+[user]
+  name = "{{ .git.user.name }}"
+  email = "{{ .git.user.email }}"
+
+[include]
+  path = {{ joinPath $.chezmoi.homeDir ".config/git/signatures" }}

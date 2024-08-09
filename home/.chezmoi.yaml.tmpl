@@ -1,0 +1,34 @@
+{{- $name := "Zikoeng Tsik" }}
+{{- $email := "tsik@zikoeng.com" }}
+
+{{- $gitSigningEnable := false }}
+{{- $gitSigningPrivKey := (joinPath $.chezmoi.homeDir ".ssh/id_gitsign") }}
+{{- $gitSigningKey := (printf "%s.pub" $gitSigningPrivKey)}}
+{{- $gitSigningAllowedSigners := list }}
+{{- if and (stat $gitSigningPrivKey) (stat $gitSigningKey) }}
+{{-   $gitSigningEnable = true }}
+{{-   $gitSigningAllowedSigners = prepend $gitSigningAllowedSigners
+        (cat $email (slice (splitList " " (include $gitSigningKey )) 0 2 | join " "))
+}}
+{{- end -}}
+
+data:
+  system:
+    is_darwin: {{ (eq .chezmoi.os "darwin") }}
+
+  git:
+    user:
+      name: {{ $name | quote }}
+      email: {{ $email | quote }}
+    signing:
+      enable: {{ $gitSigningEnable }}
+      format: ssh
+      key: {{ $gitSigningKey | quote }}
+      {{- if empty $gitSigningAllowedSigners }}
+      allowed_signers: []
+      {{- else }}
+      allowed_signers:
+        {{- range $item := $gitSigningAllowedSigners }}
+        - {{ $item | quote }}
+        {{- end }}
+      {{- end }}

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+export XDG_DATA_HOME="${HOME}/.local/share"
+export ZSH_DATA_HOME="${XDG_DATA_HOME}/zsh"
+export ZSH_COMPLETIONS_HOME="${ZSH_DATA_HOME}/completions"
+mkdir -p ${ZSH_COMPLETIONS_HOME}
+
+# System
+# =========================================================== #
+
+{{- if .system.is_darwin }}
+
+# diskutil
+curl -s https://raw.githubusercontent.com/clarketm/zsh-completions/master/src/_diskutil -o ${ZSH_COMPLETIONS_HOME}/_diskutil
+
+{{- end }}

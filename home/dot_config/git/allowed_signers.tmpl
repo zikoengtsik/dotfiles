@@ -1,0 +1,3 @@
+{{- if .git.signing.enable -}}
+{{-   .git.signing.allowed_signers | join "\n" }}
+{{ end -}}
