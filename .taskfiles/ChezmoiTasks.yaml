@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+---
+version: "3"
+
+tasks:
+  check:
+    internal: true
+    preconditions:
+      - sh: command -v chezmoi
+        msg: chezmoi is not installed.
+
+  init:
+    deps: [check]
+    desc: Initialize dotfiles.
+    cmd: chezmoi init --apply --source={{.ROOT_DIR}}
+
+  add:
+    desc: Add targets to the source state.
+    cmd: chezmoi add --source={{.ROOT_DIR}} {{.CLI_ARGS}}
+
+  managed:
+    desc: Show all managed files.
+    cmd: chezmoi managed --source={{.ROOT_DIR}} --path-style absolute
