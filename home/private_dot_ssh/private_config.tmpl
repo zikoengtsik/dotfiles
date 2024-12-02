@@ -1,0 +1,26 @@
+{{- $orbstack := joinPath $.chezmoi.homeDir ".orbstack/ssh/config" }}
+{{- if stat $orbstack -}}
+# Include: Orbstack(Application)
+Include {{ $orbstack }}
+{{- end }}
+
+# Include: conf.d/*
+{{- $configs := list "misklinga" "local" }}
+{{- range $_, $config := $configs }}
+Include {{ joinPath $.chezmoi.homeDir ".ssh/conf.d" $config }}
+{{- end }}
+
+# Common options
+Host *
+  AddKeysToAgent yes
+  Compression yes
+  ForwardAgent yes
+  HashKnownHosts no
+  ServerAliveCountMax 3
+  ServerAliveInterval 30
+  StrictHostKeyChecking accept-new
+
+# Git
+{{- /* https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/ */}}
+Host github.com gitlab.com bitbucket.org
+  UpdateHostKeys yes

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+export XDG_DATA_HOME="${HOME}/.local/share"
+export ASDF_DIR="${XDG_DATA_HOME}/asdf"
+export ASDF_DATA_DIR="${ASDF_DIR}"
+
+[ ! -d $ASDF_DIR/.git ] && git clone https://github.com/asdf-vm/asdf.git "${ASDF_DIR}"
+source "${ASDF_DIR}/asdf.sh"
+
+asdf plugin update --all
+
+# Plugin: python
+# =========================================================== #
+
+PYTHON_VERSION=3.12.6
+asdf plugin add python https://github.com/asdf-community/asdf-python.git
+asdf install python ${PYTHON_VERSION}
+asdf global python ${PYTHON_VERSION}
+pip install --upgrade pip
+pip install -r /dev/stdin <<EOF
+pre-commit==4.0.0
+poetry==1.8.4
+tldr==3.3.0
+EOF
+
+# Plugin: nodejs
+# =========================================================== #
+
+NODE_VERSION=22.11.0
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs ${NODE_VERSION}
+asdf global nodejs ${NODE_VERSION}
+npm install -g npm
+
+# Plugin: golang
+# =========================================================== #
+
+GO_VERSION=1.23.3
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
+asdf install golang ${GO_VERSION}
+asdf global golang ${GO_VERSION}
