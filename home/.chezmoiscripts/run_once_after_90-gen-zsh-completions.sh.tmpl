@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+export XDG_DATA_HOME="${HOME}/.local/share"
+export ZSH_DATA_HOME="${XDG_DATA_HOME}/zsh"
+export ZSH_COMPLETIONS_HOME="${ZSH_DATA_HOME}/completions"
+mkdir -p ${ZSH_COMPLETIONS_HOME}
+
+# System
+# =========================================================== #
+
+{{- if .system.is_darwin }}
+
+# diskutil
+curl -fsL https://raw.githubusercontent.com/clarketm/zsh-completions/master/src/_diskutil -o ${ZSH_COMPLETIONS_HOME}/_diskutil
+
+{{- end }}
+
+# Asdf
+# =========================================================== #
+
+export ASDF_DIR="${XDG_DATA_HOME}/asdf"
+export ASDF_DATA_DIR="${ASDF_DIR}"
+source "${ASDF_DIR}/asdf.sh"
+
+# pip: pip completion --zsh > ${ZSH_COMPLETIONS_HOME}/_pip
+curl -fsL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/pip/_pip -o ${ZSH_COMPLETIONS_HOME}/_pip
+# poetry: poetry completions zsh > ${ZSH_COMPLETIONS_HOME}/_poetry
+curl -fsL https://raw.githubusercontent.com/clarketm/zsh-completions/master/src/_poetry -o ${ZSH_COMPLETIONS_HOME}/_poetry
+# pre-commit
+curl -fsL https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_pre-commit -o ${ZSH_COMPLETIONS_HOME}/_pre-commit
+# tldr
+tldr --print-completion zsh > ${ZSH_COMPLETIONS_HOME}/_tldr
+
+# node
+curl -fsL https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_node -o ${ZSH_COMPLETIONS_HOME}/_node
