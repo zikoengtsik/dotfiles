@@ -1,0 +1,4 @@
+data:
+  system:
+    is_root: {{ (eq .chezmoi.username "root") }}
+    on_darwin: {{ (eq .chezmoi.os "darwin") }}

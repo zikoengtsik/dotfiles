@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+export XDG_DATA_HOME="${HOME}/.local/share"
+export ZSH_COMPLETIONS_HOME="${XDG_DATA_HOME}/zsh/completions"
+
+export ASDF_DIR="${XDG_DATA_HOME}/asdf"
+export ASDF_DATA_DIR="${ASDF_DIR}"
+
+mkdir -p ${ZSH_COMPLETIONS_HOME}
+
+# Installation
+[ ! -d ${ASDF_DIR}/.git ] && git clone https://github.com/asdf-vm/asdf.git "${ASDF_DIR}"
+source "${ASDF_DIR}/asdf.sh"
+
+# Update all plugins
+asdf plugin update --all
+
+# Plugin: python
+# =========================================================== #
+
+PYTHON_VERSION=3.12.8
+asdf plugin add python https://github.com/asdf-community/asdf-python.git
+asdf install python ${PYTHON_VERSION}
+asdf global python ${PYTHON_VERSION}
+pip install --upgrade pip
+pip install -r /dev/stdin <<EOF
+pre-commit==4.0.0
+poetry==1.8.5
+tldr==3.3.0
+EOF
+
+# pip: pip completion --zsh
+curl -fsL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/pip/_pip -o "${ZSH_COMPLETIONS_HOME}/_pip"
+
+# pre-commit
+curl -fsL https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_pre-commit -o "${ZSH_COMPLETIONS_HOME}/_pre-commit"
+
+# poetry: poetry completions zsh
+curl -fsL https://raw.githubusercontent.com/clarketm/zsh-completions/master/src/_poetry -o "${ZSH_COMPLETIONS_HOME}/_poetry"
+
+# tldr
+tldr --print-completion zsh > "${ZSH_COMPLETIONS_HOME}/_tldr"

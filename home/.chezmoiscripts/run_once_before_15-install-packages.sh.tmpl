@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+{{- if .system.on_darwin }}
+
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  # For ARM macOS
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Homebrew is not installed."
+  exit 1
+fi
+
+brew update
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+# https://github.com/Homebrew/homebrew-bundle
+
+# Formulae
+brew "coreutils"
+brew "file-formula"
+brew "gawk"
+brew "git"
+brew "gnu-tar"
+brew "gnu-sed"
+brew "less"
+brew "tree"
+brew "wget"
+brew "zsh"
+
+# Formulae: Python build dependencies
+# ref: https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+brew "openssl"
+brew "readline"
+brew "sqlite3"
+brew "xz"
+brew "zlib"
+brew "tcl-tk"
+
+# Fonts
+cask "font-ubuntu-mono"
+
+# System tools
+cask "appcleaner"
+cask "fliqlo"
+cask "maczip"
+cask "raycast"
+cask "stats"
+
+# Web browser
+cask "google-chrome"
+cask "firefox"
+
+# Cloud Storage
+cask "dropbox"
+
+# Media & Video
+cask "iina"
+cask "kap"
+
+# Communication
+cask "discord"
+
+# Note-taking
+cask "obsidian"
+
+# Development
+cask "orbstack"
+cask "visual-studio-code"
+cask "wezterm"
+EOF
+
+{{- end }}
