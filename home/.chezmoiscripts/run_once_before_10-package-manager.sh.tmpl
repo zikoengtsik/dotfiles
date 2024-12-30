@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+{{- if .system.on_darwin }}
+
+# Install Xcode Command Line Tools
+if [ ! -d $(xcode-select -p) ]; then
+  echo "Installing Xcode Command Line Tools..."
+  xcode-select --install
+fi
+
+# Install Homebrew if it's not already installed.
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Installing Homebrew ..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+{{- end }}
