@@ -156,6 +156,11 @@ zinit ice wait lucid as'command' from'gh-r' bpick'lefthook*.gz' mv'lefthook* -> 
   atclone'./lefthook completion zsh > _lefthook' atpull'%atclone' pick'lefthook'
 zinit light evilmartians/lefthook
 
+# --- k8s --- #
+
+zinit ice wait lucid nocompletions as'command' from'gh-r' bpick'k9s*.tar.gz' mv'k9s* -> k9s' pick'k9s'
+zinit light derailed/k9s
+
 # Other Commands
 # ================================================================ #
 
