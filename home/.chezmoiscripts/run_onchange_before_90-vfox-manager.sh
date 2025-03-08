@@ -73,6 +73,5 @@ vfox use -g "nodejs@${NODEJS_VERSION}"
 npm install -s -g npm
 
 # Pnpm
-corepack enable pnpm
-corepack install -g pnpm@latest-10
+npm install -g pnpm@10.6.0
 pnpm completion zsh > "${ZSH_COMPLETIONS_HOME}/_pnpm"
