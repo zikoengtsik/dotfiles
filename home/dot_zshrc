@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+# ================================================================ #
+# XDG Base Directory
+# ================================================================ #
+
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_BIN_HOME="${HOME}/.local/bin"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
+
+# Make sure the directories exist.
+mkdir -p "${XDG_CACHE_HOME}" "${XDG_CONFIG_HOME}" "${XDG_BIN_HOME}" "${XDG_DATA_HOME}" "${XDG_STATE_HOME}"
+
+# ================================================================ #
+# Zsh Configuration
+# ================================================================ #
+
+export ZSH_CONFIG_HOME="${XDG_CONFIG_HOME}/zsh"
+export ZSH_DATA_HOME="${XDG_DATA_HOME}/zsh"
+export ZSH_STATE_HOME="${XDG_STATE_HOME}/zsh"
+export ZSH_COMPLETIONS_HOME="${ZSH_DATA_HOME}/completions"
+
+# Make sure the directories exist.
+mkdir -p "${ZSH_CONFIG_HOME}" "${ZSH_DATA_HOME}" "${ZSH_STATE_HOME}" "${ZSH_COMPLETIONS_HOME}"
+
+# Load .zshrc.before if it exists.
+if [ -f "${HOME}/.zshrc.before" ]; then
+  source "${HOME}/.zshrc.before"
+fi
+
+# Load the zsh configuration.
+source "${ZSH_CONFIG_HOME}/builtin.zsh"
+source "${ZSH_CONFIG_HOME}/shell.zsh"
+source "${ZSH_CONFIG_HOME}/zinit.zsh"
+
+# Load .zshrc.after if it exists.
+if [ -f "${HOME}/.zshrc.after" ]; then
+  source "${HOME}/.zshrc.after"
+fi
