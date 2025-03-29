@@ -46,6 +46,7 @@ pip install -q --upgrade pip
 
 # Install packages
 pip install -q -r /dev/stdin <<EOF
+asciinema==2.4.0
 ipython==9.0.2
 poetry==2.1.1
 tldr==3.3.0
