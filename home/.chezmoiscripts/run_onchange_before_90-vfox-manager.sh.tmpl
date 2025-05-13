@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+# =============================================================== #
+# Vfox
+# =============================================================== #
+
+{{- if .system.on_darwin }}
+
+# Load Homebrew
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  # For ARM macOS
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+{{- end }}
+
+# Activate vfox
+eval "$(vfox activate bash)"
+
+# Upgrade vfox to the latest version
+vfox upgrade
+
+# Update all installed plugins
+vfox update --all
+
+# Golang
+# =============================================================== #
+
+GOLANG_VERSION=1.24.2
+vfox add golang
+vfox install "golang@${GOLANG_VERSION}"
+vfox use -g "golang@${GOLANG_VERSION}"
+
+# Python
+# =============================================================== #
+
+PYTHON_VERSION=3.12.10
+vfox add python
+vfox install "python@${PYTHON_VERSION}"
+vfox use -g "python@${PYTHON_VERSION}"
+
+# Upgrade pip to the latest version
+pip install -q --upgrade pip
+
+# Install packages
+pip install -q -r /dev/stdin <<EOF
+asciinema==2.4.0
+ipython==9.2.0
+tldr==3.4.0
+EOF
+
+# pip: pip completion --zsh
+curl -fsL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/pip/_pip -o "${ZSH_COMPLETIONS_HOME}/_pip"
+
+# tldr
+tldr --print-completion zsh > "${ZSH_COMPLETIONS_HOME}/_tldr"
+
+# Nodejs
+# =============================================================== #
+
+NODEJS_VERSION=22.15.0
+vfox add nodejs
+vfox install "nodejs@${NODEJS_VERSION}"
+vfox use -g "nodejs@${NODEJS_VERSION}"
+
+# Upgrade npm to the latest version
+npm install -s -g npm
+
+# Pnpm
+npm install -s -g pnpm@10.10.0
+pnpm completion zsh > "${ZSH_COMPLETIONS_HOME}/_pnpm"
