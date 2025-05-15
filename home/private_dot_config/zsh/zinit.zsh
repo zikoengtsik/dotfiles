@@ -56,7 +56,7 @@ zinit wait lucid for \
     OMZP::colored-man-pages \
     OMZP::command-not-found \
   atinit'GLOBALIAS_FILTER_VALUES=(
-    grep ls vim
+    grep ls pip vim
   )' \
     OMZP::globalias
 
@@ -98,7 +98,7 @@ zinit wait lucid for \
 
 # python
 zinit wait lucid for \
-    OMZP::poetry-env \
+    OMZP::pip \
     OMZP::python
 
 # Commands: Chezmoi
