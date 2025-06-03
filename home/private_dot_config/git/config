@@ -1,0 +1,53 @@
+[apply]
+  whitespace = fix
+
+[branch]
+  autosetuprebase = always
+  sort = -committerdate
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow bold
+  remote = green bold
+  plain = red bold
+
+[color "status"]
+  added = green
+  changed = yellow bold
+  untracked = red bold
+
+[commit]
+  verbose = true
+
+[fetch]
+  prune = true
+
+[help]
+  autocorrect = 1
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  default = simple
+  followTags = true
+
+[rebase]
+  autosquash = true
+  autostash = true
+  missingCommitsCheck = error
+  updateRefs = true
+
+[include]
+  path = config.d/default-delta
+
+  path = config.d/personal
+  path = config.d/business
+  path = config.d/local
