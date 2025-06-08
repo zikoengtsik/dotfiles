@@ -114,6 +114,15 @@ zinit ice wait lucid as'command' from'gh-r' bpick'rclone*.zip' mv'rclone* -> rcl
   atclone'./rclone/rclone completion zsh - > ./_rclone' atpull'%atclone' pick'rclone/rclone'
 zinit light rclone/rclone
 
+# --- uv --- #
+
+zinit ice wait lucid as'command' from'gh-r' bpick'uv*.tar.gz' mv'uv* -> uv' \
+  atclone'
+    ./uv/uv generate-shell-completion zsh > _uv
+    ./uv/uvx --generate-shell-completion zsh > _uvx
+  ' atpull'%atclone' pick'uv/uv*'
+zinit light astral-sh/uv
+
 # Commands - Text Processing
 # ================================================================ #
 
@@ -202,8 +211,5 @@ zinit ice wait lucid as'command' id-as'zsh-completions' atclone'
     has pre-commit && curl -fsL https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/_pre-commit -o _pre-commit
     # tldr
     has tldr && tldr --print-completion zsh > _tldr
-    # uv
-    has uv && uv generate-shell-completion zsh > _uv
-    has uvx && uvx --generate-shell-completion zsh > _uvx
   ' atpull'%atclone' run-atpull
 zinit light zdharma-continuum/null
