@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# =============================================================== #
+# Asdf
+# =============================================================== #
+
+export ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
+export PATH="${ASDF_DATA_DIR}/shims:$PATH"
+
+# Update all installed plugins
+asdf plugin update --all
+
+# Golang
+# =============================================================== #
+
+GOLANG_VERSION=1.25.2
+
+asdf plugin add golang
+asdf install golang "${GOLANG_VERSION}"
+asdf set -u golang "${GOLANG_VERSION}"
+
+# Python
+# =============================================================== #
+
+PYTHON_VERSION=3.12.12
+
+asdf plugin add python
+asdf install python "${PYTHON_VERSION}"
+asdf set -u python "${PYTHON_VERSION}"
+
+# Upgrade pip to the latest version
+pip install -q --upgrade pip
+
+# Install packages
+pip install -q -r /dev/stdin <<EOF
+pre-commit==4.3.0
+tldr==3.4.3
+EOF
+
+# Nodejs
+# =============================================================== #
+
+NODEJS_VERSION=24.11.0
+
+asdf plugin add nodejs
+asdf install nodejs "${NODEJS_VERSION}"
+asdf set -u nodejs "${NODEJS_VERSION}"
+
+# Upgrade npm to the latest version
+npm install -s -g npm

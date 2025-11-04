@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+{{/* Check if user is root */}}
+{{- $sudo := "sudo " }}
+{{- if .user.is_root }}
+{{-   $sudo = "" }}
+{{- end }}
+
+{{- if .system.on_darwin }}
+
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  # For ARM macOS
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+{{- end }}
+
+# Get executable path of zsh
+zsh_path="$(which zsh)"
+[ ! -x "${zsh_path}" ] && exit 1
+
+# Add zsh to /etc/shells
+{{ $sudo }}grep -qF "${zsh_path}" /etc/shells || echo "${zsh_path}" | {{ $sudo }}tee -a /etc/shells
+
+# Set zsh as default shell
+{{ $sudo }}chsh -s "${zsh_path}" "${USER}" >/dev/null 2>&1

@@ -1,0 +1,23 @@
+# Include: config.d/*
+Include ~/.ssh/config.d/*
+
+{{ $orbstack_ssh_config := joinPath $.chezmoi.homeDir ".orbstack/ssh/config" }}
+{{- if stat $orbstack_ssh_config }}
+# Include: Orbstack SSH config
+Include {{ $orbstack_ssh_config }}
+{{- end }}
+
+# Host: *
+Host *
+  AddKeysToAgent yes
+  Compression yes
+  HashKnownHosts no
+  PreferredAuthentications publickey
+  ServerAliveCountMax 3
+  ServerAliveInterval 30
+  StrictHostKeyChecking ask
+
+# Host: git services
+{{- /* https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/ */}}
+Host github.com gitlab.com bitbucket.org
+  UpdateHostKeys yes
