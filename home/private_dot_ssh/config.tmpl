@@ -1,7 +1,7 @@
 # Include: config.d/*
 Include ~/.ssh/config.d/*
 
-{{ $orbstack_ssh_config := joinPath $.chezmoi.homeDir ".orbstack/ssh/config" }}
+{{- $orbstack_ssh_config := joinPath $.chezmoi.homeDir ".orbstack/ssh/config" -}}
 {{- if stat $orbstack_ssh_config }}
 # Include: Orbstack SSH config
 Include {{ $orbstack_ssh_config }}
