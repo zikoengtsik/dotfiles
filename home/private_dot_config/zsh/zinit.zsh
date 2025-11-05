@@ -129,6 +129,11 @@ zinit ice lucid as'command' from'gh-r' mv'direnv* -> direnv' atclone'
   ' atpull'%atclone' pick'direnv' src'zhook.zsh'
 zinit light direnv/direnv
 
+# --- go-task --- #
+
+zinit ice wait lucid as'command' from'gh-r' bpick'task*.tar.gz' pick'task'
+zinit light go-task/task
+
 # --- k8s --- #
 
 # kubectl
