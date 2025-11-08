@@ -138,8 +138,22 @@ zinit light go-task/task
 
 # kubectl
 zinit ice wait lucid as'command' id-as'k8s-kubectl' atclone'
-    curl -fsLS https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/$(uname | tr "[:upper:]" "[:lower:]")/$(uname -m)/kubectl -o ./kubectl
-    chmod +x ./kubectl; ./kubectl completion zsh > ./_kubectl
+    uname_arch() {
+      local arch=$(uname -m)
+      case $arch in
+        x86_64) arch="amd64" ;;
+        x86) arch="386" ;;
+        i686) arch="386" ;;
+        i386) arch="386" ;;
+        aarch64) arch="arm64" ;;
+        armv5*) arch="arm" ;;
+        armv6*) arch="arm" ;;
+        armv7*) arch="arm" ;;
+      esac
+      echo ${arch}
+    }
+    curl -fsLS https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/$(uname | tr "[:upper:]" "[:lower:]")/$(uname_arch)/kubectl -o ./kubectl
+    chmod +x ./kubectl; ./kubectl completion zsh > _kubectl
   ' atpull'%atclone'
 zinit light zdharma-continuum/null
 

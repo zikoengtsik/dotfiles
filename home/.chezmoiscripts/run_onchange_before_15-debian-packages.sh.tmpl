@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+{{- if .system.on_debian }}
+
+{{/* Check if user is root */}}
+{{- $sudo := "sudo " }}
+{{- if .user.is_root }}
+{{-   $sudo = "" }}
+{{- end }}
+
+# Refresh the package list
+{{ $sudo }}apt update
+
+# Install Packages
+{{ $sudo }}apt install -y \
+  fastfetch \
+  git \
+  neovim \
+  tree \
+  zsh
+
+# Install Packages - GNU Tools
+{{ $sudo }}apt install -y \
+  autoconf \
+  bash \
+  coreutils \
+  diffutils \
+  file \
+  ed \
+  findutils \
+  flex \
+  less \
+  m4 \
+  make \
+  man-db \
+  wdiff \
+  wget \
+  zip
+
+# Install Packages - Python build dependencies
+{{ $sudo }}apt install -y \
+  build-essential curl git libbz2-dev libffi-dev liblzma-dev libncursesw5-dev \
+  libreadline-dev libsqlite3-dev libssl-dev libxml2-dev libxmlsec1-dev make tk-dev xz-utils zlib1g-dev
+
+{{- end }}
