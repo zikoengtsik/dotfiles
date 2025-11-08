@@ -4,8 +4,15 @@
 # Asdf
 # =============================================================== #
 
+export XDG_BIN_HOME="${HOME}/.local/bin"
+export XDG_DATA_HOME="${HOME}/.local/share"
+
 export ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
+export PATH="${XDG_BIN_HOME}:${PATH}"
 export PATH="${ASDF_DATA_DIR}/shims:$PATH"
+
+# Make sure the directories exist.
+mkdir -p "${XDG_BIN_HOME}" "${XDG_DATA_HOME}"
 
 # Update all installed plugins
 asdf plugin update --all
