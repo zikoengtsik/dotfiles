@@ -75,6 +75,9 @@ zinit wait lucid for \
 
 # git
 zinit wait lucid for \
+  atinit'
+    zstyle ':omz:alpha:lib:git' async-prompt no
+  ' \
     OMZL::git.zsh \
     OMZP::git \
     OMZP::gitignore
