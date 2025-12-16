@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+# ================================================================ #
+# Shell
+# ================================================================ #
+
+# Disable save/restore sessions mechanism in Terminal.app
+export SHELL_SESSIONS_DISABLE=1
+
+# Disabling System-Wide compinit Call (Ubuntu)
+skip_global_compinit=1
+
+# ================================================================ #
+# XDG Base Directory
+# ================================================================ #
+
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_BIN_HOME="${HOME}/.local/bin"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
+
+# Make sure the directories exist.
+mkdir -p "${XDG_CACHE_HOME}" "${XDG_CONFIG_HOME}" "${XDG_BIN_HOME}" "${XDG_DATA_HOME}" "${XDG_STATE_HOME}"

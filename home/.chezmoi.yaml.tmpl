@@ -1,0 +1,9 @@
+{{- $is_headless := (env "HEADLESS" | not | not) -}}  {{/* This machine have a screen and keyboard? */}}
+
+data:
+  device:
+    is_headless: {{ $is_headless }}
+  system:
+    on_darwin: {{ (eq .chezmoi.os "darwin") }}
+  user:
+    is_root: {{ (eq .chezmoi.username "root") }}

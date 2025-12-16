@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+{{- if .system.on_darwin }}
+
+# Load Homebrew
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  # For ARM macOS
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Check if Homebrew is installed
+if ! command -v brew >/dev/null 2>&1; then
+  echo "ERROR: Homebrew is not installed."
+  exit 1
+fi
+
+# Update Homebrew
+brew update
+
+# Install Formulae and Casks, refer to https://docs.brew.sh/Brew-Bundle-and-Brewfile
+brew bundle --file=/dev/stdin <<EOF
+# Formulae
+brew "fastfetch"
+brew "git"
+brew "neovim"
+brew "tree"
+brew "zsh"
+
+# Formulae - GNU Tools
+brew "autoconf"
+brew "bash"
+brew "coreutils"
+brew "diffutils"
+brew "file-formula"
+brew "ed"
+brew "findutils"
+brew "flex"
+brew "gawk"
+brew "gnu-indent"
+brew "gnu-sed"
+brew "gnu-tar"
+brew "gnu-which"
+brew "gpatch"
+brew "grep"
+brew "gzip"
+brew "less"
+brew "m4"
+brew "make"
+brew "man-db"
+brew "wdiff"
+brew "wget"
+brew "zip"
+
+# Formulae - Python build dependencies
+brew "pkg-config"
+brew "openssl@3"
+brew "xz"
+brew "gdbm"
+brew "tcl-tk@8"
+brew "mpdecimal"
+brew "zstd"
+
+# Casks - Fonts
+cask "font-lxgw-wenkai"
+cask "font-ubuntu-mono"
+
+# Casks - System Tools
+cask "appcleaner"
+cask "maczip"
+cask "raycast"
+cask "stats"
+
+# Casks - Web Browser
+cask "google-chrome"
+
+# Casks - Cloud Storage
+cask "dropbox"
+
+# Casks - Media && Video
+cask "iina"
+
+# Casks - Social
+cask "discord"
+
+# Casks - Note-taking
+cask "obsidian"
+
+# Casks - Development
+cask "dbeaver-community"
+cask "orbstack"
+cask "visual-studio-code"
+cask "wezterm"
+EOF
+
+{{- end }}

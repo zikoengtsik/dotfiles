@@ -1,0 +1,5 @@
+.local/bin/asdf:
+  type: archive-file
+  url: {{ gitHubLatestReleaseAssetURL "asdf-vm/asdf" (printf "asdf-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+  executable: true
+  path: asdf
