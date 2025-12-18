@@ -21,6 +21,7 @@ brew bundle --file=/dev/stdin <<EOF
 # Formulae
 brew "fastfetch"
 brew "git"
+brew "mas"
 brew "neovim"
 brew "tree"
 brew "zsh"
@@ -89,6 +90,10 @@ cask "dbeaver-community"
 cask "orbstack"
 cask "visual-studio-code"
 cask "wezterm"
+
+# Mas
+mas "Bitwarden", id: 1352778147
+mas "Xcode", id: 497799835
 EOF
 
 {{- end }}
